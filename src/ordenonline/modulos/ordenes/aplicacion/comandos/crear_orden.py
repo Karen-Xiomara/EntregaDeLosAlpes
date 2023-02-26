@@ -1,23 +1,21 @@
 from ordenonline.seedwork.aplicacion.comandos import Comando
-from aeroalpes.modulos.vuelos.aplicacion.dto import ItinerarioDTO, ReservaDTO
-from ordenonline.modulos.ordenes.aplicacion.dto import ItinerarioDTO, OrdenDTO
-from .base import CrearReservaBaseHandler
-from .base import CrearOrdenBaseHandler
+from ordenonline.modulos.ordenes.aplicacion.dto import OrdenDTO
+#from .base import CrearOrdenBaseHandler
 from dataclasses import dataclass, field
-from aeroalpes.seedwork.aplicacion.comandos import ejecutar_commando as comando
+from ordenonline.seedwork.aplicacion.comandos import ejecutar_commando as comando
 
-from aeroalpes.modulos.vuelos.dominio.entidades import Reserva
-from aeroalpes.seedwork.infraestructura.uow import UnidadTrabajoPuerto
-from aeroalpes.modulos.vuelos.aplicacion.mapeadores import MapeadorReserva
-from aeroalpes.modulos.vuelos.infraestructura.repositorios import RepositorioReservas
+#from ordenonline.modulos.vuelos.dominio.entidades import Reserva
+#from ordenonline.seedwork.infraestructura.uow import UnidadTrabajoPuerto
+#from ordenonline.modulos.vuelos.aplicacion.mapeadores import MapeadorReserva
+#from ordenonline.modulos.vuelos.infraestructura.repositorios import RepositorioReservas
 
 @dataclass
 class CrearOrden(Comando):
     fecha_creacion: str
     fecha_actualizacion: str
     id: str
-    itinerarios: list[ItinerarioDTO]
 
+"""
 
 class CrearOrdenHandler(CrearOrdenBaseHandler):
     
@@ -38,7 +36,7 @@ class CrearOrdenHandler(CrearOrdenBaseHandler):
         UnidadTrabajoPuerto.savepoint()
         UnidadTrabajoPuerto.commit()
 
-
+"""
 @comando.register(CrearOrden)
 def ejecutar_comando_crear_reserva(comando: CrearOrden):
     handler = CrearOrdenHandler()

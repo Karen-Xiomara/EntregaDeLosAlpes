@@ -69,6 +69,12 @@ def create_app(configuracion={}):
     with app.app_context():
         db.create_all()
 
+         # Importa Blueprints
+    from . import ordenes
+
+    # Registro de Blueprints
+    app.register_blueprint(ordenes.bp)    
+
     @app.route("/spec")
     def spec():
         swag = swagger(app)
