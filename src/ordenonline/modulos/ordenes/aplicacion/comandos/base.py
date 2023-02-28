@@ -1,17 +1,17 @@
 from ordenonline.seedwork.aplicacion.comandos import ComandoHandler
-from ordenonline.modulos.vuelos.infraestructura.fabricas import FabricaRepositorio
-from ordenonline.modulos.vuelos.dominio.fabricas import FabricaVuelos
+from ordenonline.modulos.ordenes.infraestructura.fabricas import FabricaRepositorio
+from ordenonline.modulos.ordenes.dominio.fabricas import FabricaOrdenes
 
 class CrearOrdenBaseHandler(ComandoHandler):
     def __init__(self):
         self._fabrica_repositorio: FabricaRepositorio = FabricaRepositorio()
-        self._fabrica_vuelos: FabricaVuelos = FabricaVuelos()
+        self._fabrica_ordenes: FabricaOrdenes = FabricaOrdenes()
 
     @property
     def fabrica_repositorio(self):
         return self._fabrica_repositorio
     
     @property
-    def fabrica_vuelos(self):
-        return self._fabrica_vuelos    
+    def fabrica_ordenes(self):
+        return self._fabrica_ordenes    
     

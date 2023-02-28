@@ -6,3 +6,4 @@ class OrdenDTO(DTO):
     fecha_creacion: str
     fecha_actualizacion: str
     id: str
+    id_cliente: int
