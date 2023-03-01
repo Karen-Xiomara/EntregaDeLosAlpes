@@ -1,5 +1,6 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pedido.seedwork.dominio.entidades import Entidad
+import uuid
 
 @dataclass
 class Pedido(Entidad):

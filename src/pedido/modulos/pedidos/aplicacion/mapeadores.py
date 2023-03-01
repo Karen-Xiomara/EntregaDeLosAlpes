@@ -4,7 +4,11 @@ from .dto import PedidoDTO
 class MapeadorPedidoDTOJson(AppMap):
 
     def externo_a_dto(self, externo: dict) -> PedidoDTO:
-        pedido_dto = PedidoDTO()
+        pedido_dto = PedidoDTO(
+            externo.get('id'),
+            externo.get('fecha_creacion'),
+            externo.get('fecha_actualizacion')
+        )
 
         return pedido_dto
 

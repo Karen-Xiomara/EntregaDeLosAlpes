@@ -1,7 +1,7 @@
 import pedido.seedwork.presentacion.api as api
 import json
 from pedido.seedwork.dominio.excepciones import ExcepcionDominio
-from flask import Response
+from flask import Response, request
 from pedido.modulos.pedidos.aplicacion.mapeadores import MapeadorPedidoDTOJson
 from pedido.modulos.pedidos.aplicacion.comandos.crear_pedido import CrearPedido
 

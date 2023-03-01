@@ -10,7 +10,7 @@ class CrearPedido(Comando):
     fecha_actualizacion: str
     id: str
 
-class CrearPedidoHandler(CrearPedidoBaseHandle):
+class CrearPedidoHandler(CrearPedidoBaseHandler):
     def handle(self, comando: CrearPedido):
         pedido_dto = PedidoDTO(id=comando.id, 
         fecha_actualizacion=comando.fecha_actualizacion, 
