@@ -1,5 +1,7 @@
 from pedido.seedwork.aplicacion.comandos import ComandoHandler
+from pedido.modulos.pedidos.infraestructura.fabricas import FabricaRepositorio
 from pedido.modulos.pedidos.infraestructura.fabricas import ExcepcionFabrica
+from pedido.modulos.pedidos.dominio.fabricas import FabricaPedido
 
 class CrearPedidoBaseHandler(ComandoHandler):
     def __init__(self):
