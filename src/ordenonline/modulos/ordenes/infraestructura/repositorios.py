@@ -6,66 +6,37 @@ persistir objetos dominio (agregaciones) en la capa de infraestructura del domin
 """
 
 from aeroalpes.config.db import db
-from aeroalpes.modulos.vuelos.dominio.repositorios import RepositorioReservas, RepositorioProveedores
-from aeroalpes.modulos.vuelos.dominio.objetos_valor import NombreAero, Odo, Leg, Segmento, Itinerario, CodigoIATA
-from aeroalpes.modulos.vuelos.dominio.entidades import Proveedor, Aeropuerto, Reserva
-from aeroalpes.modulos.vuelos.dominio.fabricas import FabricaVuelos
-from .dto import Reserva as ReservaDTO
-from .mapeadores import MapeadorReserva
+from aeroalpes.modulos.vuelos.aplicacion.dto import ReservaDTO
+from ordenonline.modulos.ordenes.dominio.entidades import Orden
+from ordenonline.modulos.ordenes.dominio.fabricas import FabricaOrdenes
+from ordenonline.modulos.ordenes.dominio.repositorios import RepositorioOrdenes
+from ordenonline.modulos.ordenes.dominio.mapeadores import MapeadorOrden
 from uuid import UUID
 
-class RepositorioProveedoresSQLite(RepositorioProveedores):
-
-    def obtener_por_id(self, id: UUID) -> Reserva:
-        # TODO
-        raise NotImplementedError
-
-    def obtener_todos(self) -> list[Reserva]:
-        origen=Aeropuerto(codigo="CPT", nombre="Cape Town International")
-        destino=Aeropuerto(codigo="JFK", nombre="JFK International Airport")
-        legs=[Leg(origen=origen, destino=destino)]
-        segmentos = [Segmento(legs)]
-        odos=[Odo(segmentos=segmentos)]
-
-        proveedor = Proveedor(codigo=CodigoIATA(codigo="AV"), nombre=NombreAero(nombre= "Avianca"))
-        proveedor.itinerarios = [Itinerario(odos=odos, proveedor=proveedor)]
-        return [proveedor]
-
-    def agregar(self, entity: Reserva):
-        # TODO
-        raise NotImplementedError
-
-    def actualizar(self, entity: Reserva):
-        # TODO
-        raise NotImplementedError
-
-    def eliminar(self, entity_id: UUID):
-        # TODO
-        raise NotImplementedError
 
 
-class RepositorioOrdenesSQLite(RepositorioReservas):
+class RepositorioOrdenesSQLite(RepositorioOrdenes):
 
     def __init__(self):
-        self._fabrica_vuelos: FabricaVuelos = FabricaVuelos()
+        self._fabrica_ordenes: FabricaOrdenes = FabricaOrdenes()
 
     @property
-    def fabrica_vuelos(self):
-        return self._fabrica_vuelos
+    def fabrica_ordenes(self):
+        return self._fabrica_ordenes
 
-    def obtener_por_id(self, id: UUID) -> Reserva:
+    def obtener_por_id(self, id: UUID) -> Orden:
         reserva_dto = db.session.query(ReservaDTO).filter_by(id=str(id)).one()
-        return self.fabrica_vuelos.crear_objeto(reserva_dto, MapeadorReserva())
+        return self.fabrica_ordenes.crear_objeto(orden_dto, MapeadorOrden())
 
-    def obtener_todos(self) -> list[Reserva]:
+    def obtener_todos(self) -> list[Orden]:
         # TODO
         raise NotImplementedError
 
-    def agregar(self, reserva: Reserva):
-        reserva_dto = self.fabrica_vuelos.crear_objeto(reserva, MapeadorReserva())
-        db.session.add(reserva_dto)
+    def agregar(self, orden: Orden):
+        orden_dto = self.fabrica_ordenes.crear_objeto(orden, MapeadorOrden())
+        db.session.add(orden_dto)
 
-    def actualizar(self, reserva: Reserva):
+    def actualizar(self, orden: Orden):
         # TODO
         raise NotImplementedError
 

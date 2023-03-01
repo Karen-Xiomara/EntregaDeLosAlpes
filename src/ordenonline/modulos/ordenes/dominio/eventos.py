@@ -1,7 +1,9 @@
 from __future__ import annotations
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from ordenonline.seedwork.dominio.eventos import (EventoDominio)
 from datetime import datetime
+import uuid
+
 
 @dataclass
 class OrdenCreada(EventoDominio):

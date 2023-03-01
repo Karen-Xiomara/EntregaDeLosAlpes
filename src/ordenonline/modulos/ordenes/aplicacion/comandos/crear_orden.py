@@ -8,6 +8,7 @@ from ordenonline.modulos.ordenes.dominio.entidades import Orden
 from ordenonline.seedwork.infraestructura.uow import UnidadTrabajoPuerto
 from ordenonline.modulos.ordenes.aplicacion.mapeadores import MapeadorOrden
 from ordenonline.modulos.ordenes.infraestructura.repositorios import RepositorioOrdenes
+#from aeroalpes.modulos.vuelos.infraestructura.repositorios import RepositorioReservas
 
 @dataclass
 class CrearOrden(Comando):
@@ -29,10 +30,9 @@ class CrearOrdenHandler(CrearOrdenBaseHandler):
         #orden = Orden(id_cliente=orden_dto.id_cliente)
         #orden.crear_orden(orden)
   
-        reserva: Reserva = self.fabrica_vuelos.crear_objeto(orden_dto, MapeadorOrden())
-        reserva.crear_reserva(reserva)
-
-        repositorio = self.fabrica_repositorio.crear_objeto(RepositorioReservas.__class__)
+        orden: Orden  = self._fabrica_ordenes.crear_objeto(orden_dto, MapeadorOrden())
+        orden.crear_orden(orden)
+        repositorio = self.fabrica_repositorio.crear_objeto(RepositorioOrdenes.__class__)
         """repositorio = self.fabrica_repositorio.crear_objeto(RepositorioOrdenes.__class__)
 
         UnidadTrabajoPuerto.registrar_batch(repositorio.agregar, orden)
