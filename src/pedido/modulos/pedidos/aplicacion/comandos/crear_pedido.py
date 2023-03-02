@@ -1,6 +1,7 @@
 from pedido.seedwork.aplicacion.comandos import Comando
 from pedido.seedwork.aplicacion.comandos import ejecutar_commando as comando
 from pedido.modulos.pedidos.aplicacion.dto import PedidoDTO
+from pedido.modulos.pedidos.infraestructura.repositorios import RepositorioPedido
 from dataclasses import dataclass
 from .base import CrearPedidoBaseHandler
 
