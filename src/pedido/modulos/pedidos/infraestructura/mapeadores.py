@@ -10,7 +10,7 @@ class MapeadorPedido(Mapeador):
 
     def entidad_a_dto(self, entidad: Pedido) -> PedidoDTO:
         pedido_dto = PedidoDTO()
-        pedido_dto.id = entidad.id
+        pedido_dto.id = str(entidad.id)
         pedido_dto.fecha_creacion = entidad.fecha_creacion
         pedido_dto.fecha_actualizacion = entidad.fecha_actualizacion
         pedido_dto.id_client = entidad.id_client

@@ -12,5 +12,5 @@ class Pedido(db.Model):
     fecha_creacion = db.Column(db.DateTime, nullable=False)
     fecha_actualizacion = db.Column(db.DateTime, nullable=False)
     id_client = db.Column(db.String, nullable=False)
-    fecha_orden = db.Column(db.DateTime, nullable=False)
+    fecha_orden = db.Column(db.String, nullable=False)
     numero_orden = db.Column(db.String, nullable=False)
