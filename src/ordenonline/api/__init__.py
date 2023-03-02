@@ -6,22 +6,19 @@ from flask_swagger import swagger
 # Identifica el directorio base
 basedir = os.path.abspath(os.path.dirname(__file__))
 
+
 def registrar_handlers():
     import ordenonline.modulos.ordenes.aplicacion
 
 def importar_modelos_alchemy():
     import ordenonline.modulos.ordenes.infraestructura.dto
-"""
+
 def comenzar_consumidor():
 
 
     import threading
-    import aeroalpes.modulos.cliente.infraestructura.consumidores as cliente
-    import aeroalpes.modulos.hoteles.infraestructura.consumidores as hoteles
-    import aeroalpes.modulos.pagos.infraestructura.consumidores as pagos
-    import aeroalpes.modulos.precios_dinamicos.infraestructura.consumidores as precios_dinamicos
-    import aeroalpes.modulos.vehiculos.infraestructura.consumidores as vehiculos
-    import aeroalpes.modulos.vuelos.infraestructura.consumidores as vuelos
+    import ordenonline.modulos.ordenes.infraestructura.consumidores as ordenes
+
 
     # Suscripción a eventos
     threading.Thread(target=cliente.suscribirse_a_eventos).start()
@@ -38,7 +35,7 @@ def comenzar_consumidor():
     threading.Thread(target=precios_dinamicos.suscribirse_a_comandos).start()
     threading.Thread(target=vehiculos.suscribirse_a_comandos).start()
     threading.Thread(target=vuelos.suscribirse_a_comandos).start()
-"""
+
 def create_app(configuracion={}):
     # Init la aplicacion de Flask
     app = Flask(__name__, instance_relative_config=True)

@@ -33,11 +33,11 @@ class CrearOrdenHandler(CrearOrdenBaseHandler):
 
         
         repositorio = self.fabrica_repositorio.crear_objeto(RepositorioOrdenes.__class__)
-        repositorio.agregar(orden)
-        """
+        #repositorio.agregar(orden)
+        
         UnidadTrabajoPuerto.registrar_batch(repositorio.agregar, orden)
         UnidadTrabajoPuerto.savepoint()
-        UnidadTrabajoPuerto.commit()"""
+        UnidadTrabajoPuerto.commit()
 
 @comando.register(CrearOrden)
 def ejecutar_comando_crear_orden(comando: CrearOrden):
