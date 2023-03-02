@@ -7,16 +7,14 @@ class MapeadorPedidoDTOJson(AppMap):
 
     def externo_a_dto(self, externo: dict) -> PedidoDTO:
         pedido_dto = PedidoDTO(
-            externo.get('id'),
-            externo.get('fecha_creacion'),
-            externo.get('fecha_actualizacion')
+            id_client=externo.get('id_client'),
+            fecha_orden=externo.get('fecha_orden'),
+            numero_orden=externo.get('numero_orden')
         )
-
         return pedido_dto
 
     def dto_a_externo(self, dto: PedidoDTO) -> dict:
         return dto.__dict__
-
 
 class MapeadorPedido(RepMap):
     _FORMATO_FECHA = '%Y-%m-%dT%H:%M:%SZ'
@@ -25,8 +23,10 @@ class MapeadorPedido(RepMap):
         return Pedido.__class__
 
     def entidad_a_dto(self, entidad: Pedido) -> PedidoDTO:
-        _id = str(entidad.id)
-        fecha_creacion = entidad.fecha_creacion.strftime(self._FORMATO_FECHA)
-        fecha_actualizacion = entidad.fecha_actualizacion.strftime(self._FORMATO_FECHA)
+        return PedidoDTO(id_client=str(entidad.id_client), 
+            fecha_orden=entidad.fecha_orden.strftime(self._FORMATO_FECHA), 
+            numero_orden=entidad.numero_orden)
 
-        return PedidoDTO(fecha_creacion, fecha_actualizacion, _id)
+    def dto_a_entidad(self, dto: PedidoDTO) -> Pedido:
+        pedido = Pedido(id_client=dto.id_client, fecha_orden=dto.fecha_orden, numero_orden=dto.numero_orden)
+        return pedido

@@ -2,6 +2,7 @@ import pedido.seedwork.presentacion.api as api
 import json
 from pedido.seedwork.dominio.excepciones import ExcepcionDominio
 from pedido.seedwork.aplicacion.queries import ejecutar_query
+from pedido.seedwork.aplicacion.comandos import ejecutar_commando
 from flask import Response, request
 from pedido.modulos.pedidos.aplicacion.mapeadores import MapeadorPedidoDTOJson
 from pedido.modulos.pedidos.aplicacion.comandos.crear_pedido import CrearPedido
@@ -18,8 +19,10 @@ def reservar_asincrona():
         map_pedido = MapeadorPedidoDTOJson()
         pedido_dto = map_pedido.externo_a_dto(pedido_dict) 
 
-        comando = CrearPedido(id=pedido_dto.id, fecha_actualizacion=pedido_dto.fecha_actualizacion, fecha_creacion=pedido_dto.fecha_creacion)
-        #ejecutar_comando(comando)
+        comando = CrearPedido(id_client=pedido_dto.id_client, 
+            fecha_orden=pedido_dto.fecha_orden, 
+            numero_orden=pedido_dto.numero_orden)
+        ejecutar_commando(comando)
 
         return Response('{}', status=202, mimetype='application/json')
     except ExcepcionDominio as e:

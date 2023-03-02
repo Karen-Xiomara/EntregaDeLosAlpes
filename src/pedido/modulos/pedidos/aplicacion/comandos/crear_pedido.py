@@ -2,23 +2,28 @@ from pedido.seedwork.aplicacion.comandos import Comando
 from pedido.seedwork.aplicacion.comandos import ejecutar_commando as comando
 from pedido.modulos.pedidos.aplicacion.dto import PedidoDTO
 from pedido.modulos.pedidos.infraestructura.repositorios import RepositorioPedido
+from pedido.modulos.pedidos.aplicacion.mapeadores import MapeadorPedido
+from pedido.modulos.pedidos.dominio.entidades import Pedido
+
 from dataclasses import dataclass
 from .base import CrearPedidoBaseHandler
 
 @dataclass
 class CrearPedido(Comando):
-    fecha_creacion: str
-    fecha_actualizacion: str
-    id: str
+    id_client: str
+    fecha_orden: str
+    numero_orden: str
 
 class CrearPedidoHandler(CrearPedidoBaseHandler):
     def handle(self, comando: CrearPedido):
-        pedido_dto = PedidoDTO(id=comando.id, 
-        fecha_actualizacion=comando.fecha_actualizacion, 
-        fecha_creacion=comando.fecha_creacion)
+        pedido_dto = PedidoDTO(
+            id_client=comando.id_client, 
+            fecha_orden=comando.fecha_orden, 
+            numero_orden=comando.numero_orden)
         
+        pedido: Pedido = self.fabrica_pedido.crear_objeto(pedido_dto, MapeadorPedido())
         repositorio = self.fabrica_repositorio.crear_objeto(RepositorioPedido.__class__)
-        repositorio.agregar()
+        repositorio.agregar(pedido)
 
 @comando.register(CrearPedido)
 def ejecutar_comando_crear_pedido(comando: CrearPedido):
