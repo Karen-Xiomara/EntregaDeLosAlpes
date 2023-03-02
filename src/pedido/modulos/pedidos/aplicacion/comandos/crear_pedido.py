@@ -15,10 +15,9 @@ class CrearPedidoHandler(CrearPedidoBaseHandler):
         pedido_dto = PedidoDTO(id=comando.id, 
         fecha_actualizacion=comando.fecha_actualizacion, 
         fecha_creacion=comando.fecha_creacion)
-
+        
         repositorio = self.fabrica_repositorio.crear_objeto(RepositorioPedido.__class__)
-        repostorio.agregar()
-
+        repositorio.agregar()
 
 @comando.register(CrearPedido)
 def ejecutar_comando_crear_pedido(comando: CrearPedido):

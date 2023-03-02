@@ -1,14 +1,25 @@
-import os
+import os, logging
 
-from flask import Flask, render_template, request, url_for, redirect, jsonify, session
+from flask import Flask, jsonify
+from flask_swagger import swagger
 
-# Identifica el directorio base
+# Identifica el directorio baseapp.logger.info("Texto Id: ")
 basedir = os.path.abspath(os.path.dirname(__file__))
 
+### handlers
+def registrar_handlers():
+    import pedido.modulos.pedidos.aplicacion
+
+### Models Alchemy
+def importar_modelos_alchemy():
+    import pedido.modulos.pedidos.infraestructura.dto
+
+### App Flask
 def create_app(configuracion={}):
     # Init la aplicacion de Flask
     app = Flask(__name__, instance_relative_config=True)
-    
+
+    logging.basicConfig(level=logging.DEBUG)
     app.config['SQLALCHEMY_DATABASE_URI'] =\
             'sqlite:///' + os.path.join(basedir, 'database.db')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -23,8 +34,8 @@ def create_app(configuracion={}):
 
     from pedido.config.db import db
 
-    #importar_modelos_alchemy()
-    #registrar_handlers()
+    importar_modelos_alchemy()
+    registrar_handlers()
 
     with app.app_context():
         db.create_all()
