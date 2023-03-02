@@ -6,7 +6,7 @@ from flask import redirect, render_template, request, session, url_for
 from flask import Response
 from ordenonline.modulos.ordenes.aplicacion.mapeadores import MapeadorOrdenDTOJson
 from ordenonline.modulos.ordenes.aplicacion.comandos.crear_orden import CrearOrden
-#from aeroalpes.seedwork.aplicacion.comandos import ejecutar_commando
+from ordenonline.seedwork.aplicacion.comandos import ejecutar_commando
 
 bp = api.crear_blueprint('ordenes', '/ordenes')
 
@@ -22,7 +22,7 @@ def ordenar_asincrona():
         
         # TODO Reemplaze es todo código sincrono y use el broker de eventos para propagar este comando de forma asíncrona
         # Revise la clase Despachador de la capa de infraestructura
-        #ejecutar_commando(comando)
+        ejecutar_commando(comando)
         
         return Response('{}', status=202, mimetype='application/json')
     except ExcepcionDominio as e:

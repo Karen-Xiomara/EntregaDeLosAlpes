@@ -13,7 +13,7 @@ class MapeadorOrden(Mapeador):
     _FORMATO_FECHA = '%Y-%m-%dT%H:%M:%SZ'
 
     def obtener_tipo(self) -> type:
-        return Reserva.__class__
+        return Orden.__class__
 
     def entidad_a_dto(self, entidad: Orden) -> OrdenDTO:
         

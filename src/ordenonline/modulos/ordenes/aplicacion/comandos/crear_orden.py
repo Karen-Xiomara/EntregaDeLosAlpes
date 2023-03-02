@@ -3,6 +3,7 @@ from ordenonline.modulos.ordenes.aplicacion.dto import OrdenDTO
 from .base import CrearOrdenBaseHandler
 from dataclasses import dataclass, field
 from ordenonline.seedwork.aplicacion.comandos import ejecutar_commando as comando
+from ordenonline.api import create_app
 
 from ordenonline.modulos.ordenes.dominio.entidades import Orden
 from ordenonline.seedwork.infraestructura.uow import UnidadTrabajoPuerto
@@ -15,6 +16,7 @@ class CrearOrden(Comando):
     fecha_creacion: str
     fecha_actualizacion: str
     id: str
+   
 
 
 
@@ -24,16 +26,15 @@ class CrearOrdenHandler(CrearOrdenBaseHandler):
         orden_dto = OrdenDTO(
                 fecha_actualizacion=comando.fecha_actualizacion
             ,   fecha_creacion=comando.fecha_creacion
-            ,   id=comando.id
-            , id_cliente=comando.id_cliente)
+            ,   id=comando.id)
 
         orden: Orden  = self._fabrica_ordenes.crear_objeto(orden_dto, MapeadorOrden())
         orden.crear_orden(orden)
 
+        
         repositorio = self.fabrica_repositorio.crear_objeto(RepositorioOrdenes.__class__)
         repositorio.agregar(orden)
-        """repositorio = self.fabrica_repositorio.crear_objeto(RepositorioOrdenes.__class__)
-
+        """
         UnidadTrabajoPuerto.registrar_batch(repositorio.agregar, orden)
         UnidadTrabajoPuerto.savepoint()
         UnidadTrabajoPuerto.commit()"""

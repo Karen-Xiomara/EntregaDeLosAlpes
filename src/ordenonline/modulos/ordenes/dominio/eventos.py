@@ -8,6 +8,5 @@ import uuid
 @dataclass
 class OrdenCreada(EventoDominio):
     id_orden: uuid.UUID = None
-    id_cliente: uuid.UUID = None
     estado: str = None
     fecha_creacion: datetime = None
