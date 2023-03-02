@@ -27,12 +27,11 @@ class CrearOrdenHandler(CrearOrdenBaseHandler):
             ,   id=comando.id
             , id_cliente=comando.id_cliente)
 
-        #orden = Orden(id_cliente=orden_dto.id_cliente)
-        #orden.crear_orden(orden)
-  
         orden: Orden  = self._fabrica_ordenes.crear_objeto(orden_dto, MapeadorOrden())
         orden.crear_orden(orden)
+
         repositorio = self.fabrica_repositorio.crear_objeto(RepositorioOrdenes.__class__)
+        repositorio.agregar(orden)
         """repositorio = self.fabrica_repositorio.crear_objeto(RepositorioOrdenes.__class__)
 
         UnidadTrabajoPuerto.registrar_batch(repositorio.agregar, orden)

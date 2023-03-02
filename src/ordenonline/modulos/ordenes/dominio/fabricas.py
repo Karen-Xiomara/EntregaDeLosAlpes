@@ -7,7 +7,7 @@ objetos complejos del dominio de vuelos
 
 from .entidades import Orden
 #from .reglas import MinimoUnItinerario, RutaValida
-#from .excepciones import TipoObjetoNoExisteEnDominioVuelosExcepcion
+from .excepciones import TipoObjetoNoExisteEnDominioOrdenesExcepcion
 from ordenonline.seedwork.dominio.repositorios import Mapeador, Repositorio
 from ordenonline.seedwork.dominio.fabricas import Fabrica
 from ordenonline.seedwork.dominio.entidades import Entidad
@@ -25,7 +25,7 @@ class _FabricaOrden(Fabrica):
             #[self.validar_regla(RutaValida(ruta)) for itin in reserva.itinerarios for odo in itin.odos for segmento in odo.segmentos for ruta in segmento.legs]
             
             return orden
-"""
+
 @dataclass
 class FabricaOrdenes(Fabrica):
     def crear_objeto(self, obj: any, mapeador: Mapeador) -> any:
@@ -33,5 +33,5 @@ class FabricaOrdenes(Fabrica):
             fabrica_orden = _FabricaOrden()
             return fabrica_orden.crear_objeto(obj, mapeador)
         else:
-            raise TipoObjetoNoExisteEnDominioVuelosExcepcion()
-"""
+            raise TipoObjetoNoExisteEnDominioOrdenesExcepcion()
+

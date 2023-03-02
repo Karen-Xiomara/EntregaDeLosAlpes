@@ -10,7 +10,7 @@ from aeroalpes.modulos.vuelos.aplicacion.dto import ReservaDTO
 from ordenonline.modulos.ordenes.dominio.entidades import Orden
 from ordenonline.modulos.ordenes.dominio.fabricas import FabricaOrdenes
 from ordenonline.modulos.ordenes.dominio.repositorios import RepositorioOrdenes
-from ordenonline.modulos.ordenes.dominio.mapeadores import MapeadorOrden
+from .mapeadores import MapeadorOrden
 from uuid import UUID
 
 
