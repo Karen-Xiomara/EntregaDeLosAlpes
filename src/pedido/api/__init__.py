@@ -6,10 +6,6 @@ from flask_swagger import swagger
 # Identifica el directorio baseapp.logger.info("Texto Id: ")
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-### handlers
-def registrar_handlers():
-    import pedido.modulos.pedidos.aplicacion
-
 ### Models Alchemy
 def importar_modelos_alchemy():
     import pedido.modulos.pedidos.infraestructura.dto
@@ -46,7 +42,6 @@ def create_app(configuracion={}):
     from pedido.config.db import db
 
     importar_modelos_alchemy()
-    registrar_handlers()
 
     with app.app_context():
         db.create_all()

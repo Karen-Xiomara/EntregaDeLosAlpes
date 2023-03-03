@@ -7,4 +7,4 @@ class ComandoCrearPedidoPayload(ComandoIntegracion):
     # TODO Cree los records para itinerarios
 
 class ComandoCrearPedido(ComandoIntegracion):
-    data = ComandoCrearPedidoPayload()
+    data = ComandoCrearPedidoPayload() 

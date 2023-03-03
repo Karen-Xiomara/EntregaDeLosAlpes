@@ -8,4 +8,4 @@ class PedidoCreadoPayload(Record):
     fecha_creacion = Long()
 
 class EventoPedidoCreado(EventoIntegracion):
-    data = PedidoCreadoPayload()
+    data = PedidoCreadoPayload() 
