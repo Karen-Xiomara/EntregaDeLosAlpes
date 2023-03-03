@@ -5,6 +5,8 @@ import time
 import logging
 import traceback
 
+from ordenonline.modulos.ordenes.infraestructura.schema.v1.eventos import EventoOrdenCreada
+from ordenonline.modulos.ordenes.infraestructura.schema.v1.comandos import ComandoCrearOrden
 from pedido.modulos.pedidos.infraestructura.schema.v1.eventos import EventoPedidoCreado
 from pedido.modulos.pedidos.infraestructura.schema.v1.comandos import ComandoCrearPedido
 from pedido.seedwork.infraestructura import utils
@@ -13,7 +15,7 @@ def suscribirse_a_eventos():
     cliente = None
     try:
         cliente = pulsar.Client(f'pulsar://{utils.broker_host()}:6650')
-        consumidor = cliente.subscribe('eventos-orden', consumer_type=_pulsar.ConsumerType.Shared,subscription_name='orden-sub-eventos', schema=AvroSchema(EventoPedidoCreado))
+        consumidor = cliente.subscribe('eventos-orden', consumer_type=_pulsar.ConsumerType.Shared,subscription_name='orden-sub-eventos', schema=AvroSchema(EventoOrdenCreada))
 
         while True:
             mensaje = consumidor.receive()
@@ -32,7 +34,7 @@ def suscribirse_a_comandos():
     cliente = None
     try:
         cliente = pulsar.Client(f'pulsar://{utils.broker_host()}:6650')
-        consumidor = cliente.subscribe('comandos-orden', consumer_type=_pulsar.ConsumerType.Shared, subscription_name='orden-sub-comandos', schema=AvroSchema(ComandoCrearPedido))
+        consumidor = cliente.subscribe('comandos-orden', consumer_type=_pulsar.ConsumerType.Shared, subscription_name='orden-sub-comandos', schema=AvroSchema(ComandoCrearOrden))
 
         while True:
             mensaje = consumidor.receive()
