@@ -21,20 +21,10 @@ def comenzar_consumidor():
 
 
     # Suscripción a eventos
-    threading.Thread(target=cliente.suscribirse_a_eventos).start()
-    threading.Thread(target=hoteles.suscribirse_a_eventos).start()
-    threading.Thread(target=pagos.suscribirse_a_eventos).start()
-    threading.Thread(target=precios_dinamicos.suscribirse_a_eventos).start()
-    threading.Thread(target=vehiculos.suscribirse_a_eventos).start()
-    threading.Thread(target=vuelos.suscribirse_a_eventos).start()
+    threading.Thread(target=ordenes.suscribirse_a_eventos).start()
 
     # Suscripción a comandos
-    threading.Thread(target=cliente.suscribirse_a_comandos).start()
-    threading.Thread(target=hoteles.suscribirse_a_comandos).start()
-    threading.Thread(target=pagos.suscribirse_a_comandos).start()
-    threading.Thread(target=precios_dinamicos.suscribirse_a_comandos).start()
-    threading.Thread(target=vehiculos.suscribirse_a_comandos).start()
-    threading.Thread(target=vuelos.suscribirse_a_comandos).start()
+    threading.Thread(target=ordenes.suscribirse_a_comandos).start()
 
 def create_app(configuracion={}):
     # Init la aplicacion de Flask
@@ -60,6 +50,8 @@ def create_app(configuracion={}):
 
     with app.app_context():
         db.create_all()
+        if not app.config.get('TESTING'):
+            comenzar_consumidor()        
        
 
          # Importa Blueprints

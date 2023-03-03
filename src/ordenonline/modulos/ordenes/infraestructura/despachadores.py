@@ -23,7 +23,7 @@ class Despachador:
         # TODO Debe existir un forma de crear el Payload en Avro con base al tipo del evento
         payload = OrdenCreadaPayload(
             id_orden=str(evento.id_orden), 
-            id_cliente=str(evento.id_cliente), 
+            #id_cliente=str(evento.id_cliente), 
             estado=str(evento.estado), 
             fecha_creacion=int(unix_time_millis(evento.fecha_creacion))
         )
