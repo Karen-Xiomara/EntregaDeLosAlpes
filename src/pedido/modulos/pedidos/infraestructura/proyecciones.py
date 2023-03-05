@@ -3,14 +3,14 @@ from pedido.seedwork.infraestructura.proyecciones import ejecutar_proyeccion as 
 from pedido.modulos.pedidos.infraestructura.fabricas import FabricaRepositorio
 from pedido.modulos.pedidos.infraestructura.repositorios import RepositorioPedido
 from pedido.modulos.pedidos.dominio.entidades import Pedido
-from pedido.modulos.pedidos.infraestructura.dto import Pedido as PedidoDTO
 
 from pedido.seedwork.infraestructura.utils import millis_a_datetime
 import datetime
 import logging
 import traceback
 from abc import ABC, abstractmethod
-from .dto import Pedido
+
+from pedido.seedwork.infraestructura.uow import UnidadTrabajoPuerto
 
 class ProyeccionPedido(Proyeccion, ABC):
     @abstractmethod
@@ -49,8 +49,8 @@ class ProyeccionPedidosLista(ProyeccionPedido):
         self.numero_orden = numero_orden
         self.fecha_orden = fecha_orden
     
-    def ejecutar(self, db=None):
-        if not db:
+    def ejecutar(self, app=None):
+        if not app:
             logging.error('ERROR: DB del app no puede ser nula')
             return
         
@@ -58,28 +58,29 @@ class ProyeccionPedidosLista(ProyeccionPedido):
         repositorio = fabrica_repositorio.crear_objeto(RepositorioPedido)
         
         # TODO Haga los cambios necesarios para que se consideren los itinerarios, demás entidades y asociaciones
-        repositorio.agregar(
-            Pedido(
+        pedido = Pedido(
                 id_client=str(self.id_client), 
                 numero_orden=str(self.numero_orden), 
                 fecha_orden=self.fecha_orden)
-        )
-        
+
+        with app.test_request_context():
+            UnidadTrabajoPuerto.registrar_batch(repositorio.agregar, pedido)
+            UnidadTrabajoPuerto.savepoint()
+            UnidadTrabajoPuerto.commit()
         # TODO ¿Y si la pedido ya existe y debemos actualizarla? Complete el método para hacer merge
 
         # TODO ¿Tal vez podríamos reutilizar la Unidad de Trabajo?
-        db.session.commit()
+        #db.session.commit()
 
 class ProyeccionPedidoHandler(ProyeccionHandler):
     
-    def handle(self, proyeccion: ProyeccionPedido):
+    def handle(self, proyeccion: ProyeccionPedido, app=None):
 
         # TODO El evento de creación no viene con todos los datos de itinerarios, esto tal vez pueda ser una extensión
         # Asi mismo estamos dejando la funcionalidad de persistencia en el mismo método de recepción. Piense que componente
         # podriamos diseñar para alojar esta funcionalidad
         from pedido.config.db import db
-
-        proyeccion.ejecutar(db=db)
+        proyeccion.ejecutar(app=app)
         
 
 @proyeccion.register(ProyeccionPedidosLista)
@@ -91,7 +92,7 @@ def ejecutar_proyeccion_pedido(proyeccion, app=None):
     try:
         with app.app_context():
             handler = ProyeccionPedidoHandler()
-            handler.handle(proyeccion)
+            handler.handle(proyeccion, app)
             
     except:
         traceback.print_exc()

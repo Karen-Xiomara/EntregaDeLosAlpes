@@ -10,5 +10,7 @@ class FabricaRepositorio(Fabrica):
     def crear_objeto(self, obj: type, mapeador: any = None) -> Repositorio:
         if obj == RepositorioPedido:
             return RepositorioPedidoSQLite()
+        elif obj == RepositorioPedido.__class__:
+            return RepositorioPedidoSQLite()
         else:
             raise ExcepcionFabrica(f'No existe fábrica para el objeto {obj}')
