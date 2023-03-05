@@ -26,7 +26,7 @@ class RepositorioPedidoSQLite(RepositorioPedido):
     def agregar(self, entity: Pedido):
         pedido_dto = self.fabrica_pedido.crear_objeto(entity, MapeadorPedido())
         db.session.add(pedido_dto)
-        db.session.commit()
+        # db.session.commit()
     
     def actualizar(self, entity: Pedido):
         # TODO

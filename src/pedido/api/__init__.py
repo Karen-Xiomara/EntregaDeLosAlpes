@@ -6,17 +6,20 @@ from flask_swagger import swagger
 # Identifica el directorio baseapp.logger.info("Texto Id: ")
 basedir = os.path.abspath(os.path.dirname(__file__))
 
+def registrar_handlers():
+    import pedido.modulos.pedidos.aplicacion
+
 ### Models Alchemy
 def importar_modelos_alchemy():
     import pedido.modulos.pedidos.infraestructura.dto
 
 ### Subscripcion a Pulsar
-def comenzar_consumidor():
+def comenzar_consumidor(app):
     import threading
     import pedido.modulos.pedidos.infraestructura.consumidores as pedidos
 
     ### Subscripcion eventos
-    threading.Thread(target=pedidos.suscribirse_a_eventos).start()
+    threading.Thread(target=pedidos.suscribirse_a_eventos, args=[app]).start()
 
     ### Subscripcion comandos
     threading.Thread(target=pedidos.suscribirse_a_comandos).start()
@@ -42,11 +45,12 @@ def create_app(configuracion={}):
     from pedido.config.db import db
 
     importar_modelos_alchemy()
+    registrar_handlers()
 
     with app.app_context():
         db.create_all()
         if not app.config.get('TESTING'):
-            comenzar_consumidor()
+            comenzar_consumidor(app)
 
      # Importa Blueprints
     from . import pedidos

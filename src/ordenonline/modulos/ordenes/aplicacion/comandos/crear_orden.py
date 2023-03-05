@@ -17,9 +17,6 @@ class CrearOrden(Comando):
     fecha_actualizacion: str
     id: str
    
-
-
-
 class CrearOrdenHandler(CrearOrdenBaseHandler):
     
     def handle(self, comando: CrearOrden):
