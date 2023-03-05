@@ -8,7 +8,7 @@ from .excepciones import ExcepcionFabrica
 @dataclass
 class FabricaRepositorio(Fabrica):
     def crear_objeto(self, obj: type, mapeador: any = None) -> Repositorio:
-        if obj == RepositorioPedido.__class__:
+        if obj == RepositorioPedido:
             return RepositorioPedidoSQLite()
         else:
-            raise ExcepcionFabrica()
+            raise ExcepcionFabrica(f'No existe fábrica para el objeto {obj}')
