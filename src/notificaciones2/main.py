@@ -18,15 +18,12 @@ class EventoIntegracion(Record):
     service_name = String()
 
 class PedidoCreadoPayload(Record):
-    id_orden = String()
-    id_client = String()
-    estado = String()
-    fecha_creacion = Long()
+    id_cliente = String()
     numero_orden = String()
     fecha_orden = String()
 
 class EventoPedidoCreado(EventoIntegracion):
-    data = PedidoCreadoPayload()
+    data = PedidoCreadoPayload() 
 
 
 
