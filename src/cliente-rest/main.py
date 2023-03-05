@@ -8,7 +8,7 @@ class OrdenOnline():
     def CrearOrden(self):
         dict_obj = {"fecha_creacion": "25/05/2002",
                     "fecha_actualizacion": "25/05/2003",
-                    "id": "400"}
+                    "id": "401"}
 
         r = requests.post(f'{self.REST_API_HOST}{self.REST_API_ENDPOINT}', json=dict_obj)
         if r.status_code == 200:

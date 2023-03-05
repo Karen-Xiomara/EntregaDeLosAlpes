@@ -36,7 +36,7 @@ Siempre puede ejecutarlo en modo DEBUG:
 ```bash
 flask --app src/ordenonline/api --debug run
 flask --app src/pedido/api --debug run -p 5001
-python src/notificaciones2/main.py
+python src/notificaciones/main.py
 python src/cliente-rest/main.py
 
 flask --app src/aeroalpes/api --debug run
