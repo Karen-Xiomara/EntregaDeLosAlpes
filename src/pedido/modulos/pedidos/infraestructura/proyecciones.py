@@ -62,6 +62,7 @@ class ProyeccionPedidosLista(ProyeccionPedido):
                 id_client=str(self.id_client), 
                 numero_orden=str(self.numero_orden), 
                 fecha_orden=self.fecha_orden)
+        pedido.crear_pedido(pedido)
 
         with app.test_request_context():
             UnidadTrabajoPuerto.registrar_batch(repositorio.agregar, pedido)

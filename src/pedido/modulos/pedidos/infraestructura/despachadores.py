@@ -17,6 +17,7 @@ class Despachador:
         cliente = pulsar.Client(f'pulsar://{utils.broker_host()}:6650')
         publicador = cliente.create_producer(topico, schema=AvroSchema(EventoPedidoCreado))
         publicador.send(mensaje)
+        print('topico: ${topico}')
         cliente.close()
 
     def publicar_evento(self, evento, topico):
@@ -24,7 +25,7 @@ class Despachador:
         payload = PedidoCreadoPayload(
             id_cliente=str(evento.id_cliente),             
             numero_orden=str(evento.numero_orden), 
-            fecha_orden=int(unix_time_millis(evento.fecha_orden))
+            fecha_orden=str(evento.fecha_orden)
         )
         evento_integracion = EventoPedidoCreado(data=payload)
         self._publicar_mensaje(evento_integracion, topico, AvroSchema(EventoPedidoCreado))

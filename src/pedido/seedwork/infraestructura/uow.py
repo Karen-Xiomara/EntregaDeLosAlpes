@@ -46,6 +46,7 @@ class UnidadTrabajo(ABC):
                 if isinstance(arg, AgregacionRaiz):
                     eventos += arg.eventos
                     break
+        print('Batch eventos: ' + str(eventos))
         return eventos
 
     @abstractmethod
@@ -79,13 +80,17 @@ class UnidadTrabajo(ABC):
 
     def _publicar_eventos_dominio(self, batch, repositorio_eventos_func):
         for evento in self._obtener_eventos(batches=[batch]):
+            print('Publicar eventos')
             if repositorio_eventos_func:
                 repositorio_eventos_func(evento)
+            print(f'evento: {type(evento).__name__}Dominio')
             dispatcher.send(signal=f'{type(evento).__name__}Dominio', evento=evento)
 
     def _publicar_eventos_post_commit(self):
         try:
             for evento in self._obtener_eventos():
+                print('Publicar Eventos Commit')
+                #print(f'evento: {type(evento).__name__}Integracion')
                 dispatcher.send(signal=f'{type(evento).__name__}Integracion', evento=evento)
         except:
             logging.error('ERROR: Suscribiendose al tópico de eventos!')

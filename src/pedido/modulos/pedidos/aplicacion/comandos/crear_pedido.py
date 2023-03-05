@@ -23,6 +23,7 @@ class CrearPedidoHandler(CrearPedidoBaseHandler):
             fecha_orden=comando.fecha_orden, 
             numero_orden=comando.numero_orden)
         pedido: Pedido = self.fabrica_pedido.crear_objeto(pedido_dto, MapeadorPedido())
+        pedido.crear_pedido(pedido)
         repositorio = self.fabrica_repositorio.crear_objeto(RepositorioPedido.__class__)
         #repositorio.agregar(pedido)
         

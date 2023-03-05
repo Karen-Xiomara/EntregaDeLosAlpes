@@ -26,7 +26,7 @@ class PedidoCreadoPayload(Record):
     fecha_orden = String()
 
 class EventoPedidoCreado(EventoIntegracion):
-    data = OrdenCreadaPayload()
+    data = PedidoCreadoPayload()
 
 
 
