@@ -7,6 +7,7 @@ import os
 def time_millis():
     return int(time.time() * 1000)
 
+
 class EventoIntegracion(Record):
     id = String(default=str(uuid.uuid4()))
     time = Long()
@@ -16,19 +17,21 @@ class EventoIntegracion(Record):
     datacontenttype = String()
     service_name = String()
 
-class ReservaCreadaPayload(Record):
-    id_reserva = String()
+class PedidoCreadoPayload(Record):
     id_cliente = String()
-    estado = String()
-    fecha_creacion = Long()
+    numero_orden = String()
+    fecha_orden = String()
 
-class EventoReservaCreada(EventoIntegracion):
-    data = ReservaCreadaPayload()
+class EventoPedidoCreado(EventoIntegracion):
+    data = PedidoCreadoPayload() 
+
+
+
 
 HOSTNAME = os.getenv('PULSAR_ADDRESS', default="localhost")
 
 client = pulsar.Client(f'pulsar://{HOSTNAME}:6650')
-consumer = client.subscribe('eventos-reserva', consumer_type=_pulsar.ConsumerType.Shared, subscription_name='sub-notificacion-eventos-reservas', schema=AvroSchema(EventoReservaCreada))
+consumer = client.subscribe('eventos-pedido', consumer_type=_pulsar.ConsumerType.Shared, subscription_name='sub-notificacion-eventos-pedidos', schema=AvroSchema(EventoPedidoCreado))
 
 while True:
     msg = consumer.receive()
