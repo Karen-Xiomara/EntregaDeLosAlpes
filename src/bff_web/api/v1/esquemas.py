@@ -29,7 +29,6 @@ def obtener_ordenes(root) -> typing.List["Orden"]:
 @strawberry.type
 class Orden:
     id: str
-    id_usuario: str
     fecha_creacion: datetime
     fecha_actualizacion: datetime
 

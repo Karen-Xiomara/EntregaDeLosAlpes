@@ -11,7 +11,7 @@ from .esquemas import *
 class Mutation:
     
     @strawberry.mutation
-    async def crear_orden(self, id: str, info: Info) -> OrdenRespuesta:
+    async def crear_orden(self, id: str, fecha_creacion:str, fecha_actualizacion:str, info: Info) -> OrdenRespuesta:
         print(f"ID : {id}")
         payload = dict(
             id = id,
