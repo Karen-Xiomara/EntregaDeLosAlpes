@@ -2,7 +2,7 @@ import pulsar
 from pulsar.schema import *
 
 from pedido.modulos.pedidos.infraestructura.schema.v1.eventos import EventoPedidoCreado, PedidoCreadoPayload
-# from pedido.modulos.pedidos.infraestructura.schema.v1.comandos import ComandoCrearOrden, ComandoCrearOrdenPayload
+#from pedido.modulos.pedidos.infraestructura.schema.v1.comandos import ComandoCrearOrden, ComandoCrearOrdenPayload
 from pedido.seedwork.infraestructura import utils
 
 import datetime
@@ -29,5 +29,3 @@ class Despachador:
         )
         evento_integracion = EventoPedidoCreado(data=payload)
         self._publicar_mensaje(evento_integracion, topico, AvroSchema(EventoPedidoCreado))
-
-  

@@ -13,18 +13,14 @@ def registrar_handlers():
 def importar_modelos_alchemy():
     import ordenonline.modulos.ordenes.infraestructura.dto
 
-#def comenzar_consumidor():
-
-
-#    import threading
-#    import ordenonline.modulos.ordenes.infraestructura.consumidores as ordenes
-
-
+def comenzar_consumidor():
+    import threading
+    import ordenonline.modulos.ordenes.infraestructura.consumidores as ordenes
     # Suscripción a eventos
- #   threading.Thread(target=ordenes.suscribirse_a_eventos).start()
+    # threading.Thread(target=ordenes.suscribirse_a_eventos).start()
 
     # Suscripción a comandos
-#    threading.Thread(target=ordenes.suscribirse_a_comandos).start()
+    threading.Thread(target=ordenes.suscribirse_a_comandos).start()
 
 def create_app(configuracion={}):
     # Init la aplicacion de Flask
@@ -50,8 +46,8 @@ def create_app(configuracion={}):
 
     with app.app_context():
         db.create_all()
-        #if not app.config.get('TESTING'):
-            #comenzar_consumidor()        
+        if not app.config.get('TESTING'):
+            comenzar_consumidor()        
        
 
          # Importa Blueprints

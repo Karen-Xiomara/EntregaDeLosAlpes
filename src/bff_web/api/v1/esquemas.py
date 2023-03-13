@@ -7,7 +7,7 @@ import os
 from datetime import datetime
 
 
-ENTREGAALPES_HOST = os.getenv("ordenonline", default="localhost")
+ENTREGAALPES_HOST = os.getenv("AEROALPES_ADDRESS", default="localhost")
 FORMATO_FECHA = '%Y-%m-%dT%H:%M:%SZ'
 
 def obtener_ordenes(root) -> typing.List["Orden"]:
@@ -19,8 +19,7 @@ def obtener_ordenes(root) -> typing.List["Orden"]:
             Orden(
                 fecha_creacion=datetime.strptime(orden.get('fecha_creacion'), FORMATO_FECHA), 
                 fecha_actualizacion=datetime.strptime(orden.get('fecha_actualizacion'), FORMATO_FECHA), 
-                id=orden.get('id'), 
-                id_usuario=orden.get('id_usuario', '')
+                id=orden.get('id')
             )
         )
 
