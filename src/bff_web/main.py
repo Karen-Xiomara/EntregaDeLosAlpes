@@ -32,14 +32,14 @@ eventos = list()
 async def app_startup():
     global tasks
     global eventos
-    task1 = asyncio.ensure_future(suscribirse_a_topico("eventos-orden", "orden-sub-eventos", "public/default/eventos-orden", eventos=eventos))
-    tasks.append(task1)
+    #task1 = asyncio.ensure_future(suscribirse_a_topico("eventos-orden", "orden-sub-eventos", "public/default/eventos-orden", eventos=eventos))
+    #tasks.append(task1)
 
-@app.on_event("shutdown")
-def shutdown_event():
-    global tasks
-    for task in tasks:
-        task.cancel()
+#@app.on_event("shutdown")
+#def shutdown_event():
+#    global tasks
+#    for task in tasks:
+#        task.cancel()
 
 @app.get('/stream')
 async def stream_mensajes(request: Request):
