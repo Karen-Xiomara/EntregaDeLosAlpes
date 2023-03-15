@@ -10,6 +10,13 @@ Los siguientes son los microservicios implementados:
 - **pedido** en este directorio se encuentra el microservicio de Pedidos, el cual se subscribe al topico de **eventos-orden** para recibir una orden la cual es almacenada en base datos para luego publicar en el topico de **eventos-pedido**
 - **ui** en este directorio se encuentra el microservicio de interfaz web, este micro se subscribe al topico **eventos-orden** para mostrar el contenido del mensaje en una interfaz html. 
 
+### Construir las imagens docker
+
+* Microservicio ordenonline:
+```bash
+docker build . -f ordenonline.Dockerfile -t ordenonline/flask
+```
+
 
 ### Ejecutar Aplicación
 

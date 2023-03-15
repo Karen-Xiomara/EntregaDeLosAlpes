@@ -36,6 +36,7 @@ def suscribirse_a_eventos():
 def suscribirse_a_comandos(app=None):
     cliente = None
     try:
+        print(f'pulsar://{utils.broker_host()}:6650')
         cliente = pulsar.Client(f'pulsar://{utils.broker_host()}:6650')
         consumidor = cliente.subscribe('comandos-orden', consumer_type=_pulsar.ConsumerType.Shared, subscription_name='ordenonline-sub-comandos-orden', schema=AvroSchema(ComandoCrearOrden))
 
