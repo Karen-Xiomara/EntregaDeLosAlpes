@@ -43,3 +43,14 @@ python src/ui/main.py
 python src/cliente-rest/main.py
 ```
 
+* Reiniciar pulsar 
+```bash
+docker-compose --profile pulsar down
+```
+
+
+* Subir BFF
+```bash
+cd src
+uvicorn bff_web.main:app --host localhost --port 8003 --reload
+```

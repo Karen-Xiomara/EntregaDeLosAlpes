@@ -20,7 +20,8 @@ def comenzar_consumidor(app):
     # threading.Thread(target=ordenes.suscribirse_a_eventos).start()
 
     # Suscripción a comandos
-    threading.Thread(target=ordenes.suscribirse_a_comandos,args=[app]).start()
+    #threading.Thread(target=ordenes.suscribirse_a_comandos,args=[app]).start()
+    threading.Thread(target=ordenes.suscribirse_a_ejecutar_saga,args=[app]).start()
 
 def create_app(configuracion={}):
     # Init la aplicacion de Flask
@@ -52,6 +53,8 @@ def create_app(configuracion={}):
 
          # Importa Blueprints
     from . import ordenes
+    from ordenonline.modulos.sagas.aplicacion.coordinadores.saga_orden import CoordinadorOrdenes
+    CoordinadorOrdenes()
 
     # Registro de Blueprints
     app.register_blueprint(ordenes.bp)    

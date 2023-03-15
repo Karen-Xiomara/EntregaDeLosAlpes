@@ -29,6 +29,7 @@ class Mutation:
             data = payload
         )
         despachador = Despachador()
-        info.context["background_tasks"].add_task(despachador.publicar_mensaje, comando, "comandos-orden", "public/default/comandos-orden")
+        info.context["background_tasks"].add_task(despachador.publicar_mensaje, comando, "ejecutar-saga", "public/default/comandos-orden")
+        #info.context["background_tasks"].add_task(despachador.publicar_mensaje, comando, "ejecutar-saga", "public/default/ejecutar-saga")  
         
         return OrdenRespuesta(mensaje="Procesando Mensaje", codigo=203)

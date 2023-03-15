@@ -9,6 +9,7 @@ class Despachador:
 
     async def publicar_mensaje(self, mensaje, topico, schema):
         json_schema = utils.consultar_schema_registry(schema)  
+        #print(f"JSON Schema: {json_schema}")
         avro_schema = utils.obtener_schema_avro_de_diccionario(json_schema)
 
         cliente = pulsar.Client(f'pulsar://{utils.broker_host()}:6650')
