@@ -31,7 +31,18 @@ flask --app src/pedido/api --debug run -p 5001
 * Iniciar el microservicio de Notificaciones:
 ```bash
 python src/notificaciones/main.py
+
 ```
+
+* Iniciar el BFF:
+```bash
+pip install -r bff-requirements.txt
+cd src
+uvicorn bff_web.main:app --host localhost --port 8003 --reload
+
+```
+
+
 
 * Iniciar el microservicio de UI:
 ```bash
