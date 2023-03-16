@@ -6,7 +6,7 @@ import logging
 import traceback
 
 from ordenonline.modulos.ordenes.infraestructura.schema.v1.eventos import EventoOrdenCreada
-from ordenonline.modulos.ordenes.infraestructura.schema.v1.comandos import ComandoCrearOrden
+#from ordenonline.modulos.ordenes.infraestructura.schema.v1.comandos import ComandoCrearOrden
 from pedido.seedwork.infraestructura import utils
 
 from pedido.modulos.pedidos.aplicacion.comandos.crear_pedido import CrearPedido
@@ -49,13 +49,13 @@ def suscribirse_a_comandos():
     cliente = None
     try:
         cliente = pulsar.Client(f'pulsar://{utils.broker_host()}:6650')
-        consumidor = cliente.subscribe('comandos-orden', consumer_type=_pulsar.ConsumerType.Shared, subscription_name='orden-sub-comandos', schema=AvroSchema(ComandoCrearOrden))
+        #consumidor = cliente.subscribe('comandos-orden', consumer_type=_pulsar.ConsumerType.Shared, subscription_name='orden-sub-comandos', schema=AvroSchema(ComandoCrearOrden))
 
-        while True:
-            mensaje = consumidor.receive()
-            print(f'Comando recibido: {mensaje.value().data}')
+        # while True:
+        #     mensaje = consumidor.receive()
+        #     print(f'Comando recibido: {mensaje.value().data}')
 
-            consumidor.acknowledge(mensaje)     
+        #     consumidor.acknowledge(mensaje)     
             
         cliente.close()
     except:

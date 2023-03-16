@@ -33,7 +33,9 @@ class Despachador:
     def publicar_comando(self, comando, topico):
         # TODO Debe existir un forma de crear el Payload en Avro con base al tipo del comando
         payload = ComandoCrearOrdenPayload(
-            id_usuario=str(comando.id_usuario)
+            id=str(comando.id),
+            fecha_creacion=str(comando.fecha_creacion),
+            fecha_actualizacion=str(comando.fecha_actualizacion)
             # agregar itinerarios
         )
         comando_integracion = ComandoCrearOrden(data=payload)

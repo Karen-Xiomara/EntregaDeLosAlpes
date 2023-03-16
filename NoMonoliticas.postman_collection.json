@@ -1,0 +1,38 @@
+{
+	"info": {
+		"_postman_id": "eec857e5-3c35-4747-9521-f3c0d309ad55",
+		"name": "NoMonoliticas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23269791"
+	},
+	"item": [
+		{
+			"name": "https://8003-karenxiomar-entregadelo-u0en5nbjxi0.ws-us90.gitpod.io/v1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation MyMutation {\r\n  crearOrden(\r\n    fechaActualizacion: \"20/5/2005\"\r\n    fechaCreacion: \"20/5/2007\"\r\n    id: \"20\"\r\n  ) {\r\n    codigo\r\n    mensaje\r\n  }\r\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "https://8003-karenxiomar-entregadelo-u0en5nbjxi0.ws-us90.gitpod.io/v1",
+					"protocol": "https",
+					"host": [
+						"8003-karenxiomar-entregadelo-u0en5nbjxi0",
+						"ws-us90",
+						"gitpod",
+						"io"
+					],
+					"path": [
+						"v1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
