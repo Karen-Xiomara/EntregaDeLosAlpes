@@ -54,3 +54,8 @@ python src/ui/main.py
 python src/cliente-rest/main.py
 ```
 
+
+## Probar el endpoint del BFF
+Se debe subir los contenedores de pulsar, subir el ms ordenonline, ms pedido, ms notificaciones, ms notificaciones y el BFF. Se debe habilitar el puerto del BFF como público y acceder a la url generada en la pestaña de PORTS que comienza con con el puerto  8003.... Por último en la raiz del proyecto se encuentra la colección postman de nombre Nomonoliticas.postman_collection.json que se pueda usar para hacer la solicitud usando GraphQL
+
+
