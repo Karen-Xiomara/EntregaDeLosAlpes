@@ -9,6 +9,7 @@ Los siguientes son los microservicios implementados:
 - **ordenonline** en este directorio se encuentra el microservicio de Ordenesonline, el cual recibe una orden la cual es almacenada en base datos, para luego publicar en el topico de **eventos-orden** 
 - **pedido** en este directorio se encuentra el microservicio de Pedidos, el cual se subscribe al topico de **eventos-orden** para recibir una orden la cual es almacenada en base datos para luego publicar en el topico de **eventos-pedido**
 - **ui** en este directorio se encuentra el microservicio de interfaz web, este micro se subscribe al topico **eventos-orden** para mostrar el contenido del mensaje en una interfaz html. 
+- **bff** en este directorio se encuentra el backend for frontend, el cual publica en el tópico **comandos-orden** que inicia el proceso de creación de una orden 
 
 
 ### Ejecutar Aplicación
